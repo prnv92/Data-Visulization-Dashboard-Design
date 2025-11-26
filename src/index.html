@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funding the Future: Mapping India's Startup Momentum</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background effects -->
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    
+    <div class="container">
+        <div class="bento-grid">
+            <!-- Hero Stats - Full width -->
+            <div class="grid-item hero">
+                <div class="hero-bg-pattern"></div>
+                <div class="hero-content">
+                    <div class="hero-header">
+                        <h1>Funding the Future</h1>
+                        <p>Mapping India's startup momentum from 2020 to present</p>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="icon-box">
+                                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                        <polyline points="17 6 23 6 23 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span>Total Funding</span>
+                            </div>
+                            <div class="stat-value" id="totalFunding">$0B</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="icon-box">
+                                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <rect x="3" y="3" width="7" height="7"></rect>
+                                        <rect x="14" y="3" width="7" height="7"></rect>
+                                        <rect x="14" y="14" width="7" height="7"></rect>
+                                        <rect x="3" y="14" width="7" height="7"></rect>
+                                    </svg>
+                                </div>
+                                <span>Startups Funded</span>
+                            </div>
+                            <div class="stat-value" id="totalStartups">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sector Chart - Large tile -->
+            <div class="grid-item large sector-chart">
+                <div class="card-header">
+                    <div class="icon-box indigo">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Where the Money Flows</h3>
+                        <p class="subtitle">Top sectors by funding ($M)</p>
+                    </div>
+                </div>
+                <canvas id="sectorChart"></canvas>
+                <div class="legend" id="sectorLegend"></div>
+            </div>
+
+            <!-- Funding Stages - Medium tile -->
+            <div class="grid-item funding-stages">
+                <div class="card-header">
+                    <div class="icon-box amber">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Deal Stages</h3>
+                        <p class="subtitle">Funding distribution</p>
+                    </div>
+                </div>
+                <canvas id="fundingStagesChart"></canvas>
+                <div class="legend-grid" id="stagesLegend"></div>
+            </div>
+
+            <!-- Timeline Chart - Large tile -->
+            <div class="grid-item large timeline-chart">
+                <div class="card-header">
+                    <div class="icon-box emerald">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Momentum Over Time</h3>
+                        <p class="subtitle">Yearly funding evolution ($M)</p>
+                    </div>
+                </div>
+                <canvas id="timelineChart"></canvas>
+                <div class="timeline-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Peak Year</div>
+                        <div class="stat-data" id="peakYear">-</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Total Deals</div>
+                        <div class="stat-data" id="totalDeals">-</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Avg/Year</div>
+                        <div class="stat-data" id="avgYear">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- City Leaders - Medium tall tile -->
+            <div class="grid-item tall city-leaders">
+                <div class="card-header">
+                    <div class="icon-box pink">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Innovation Hubs</h3>
+                        <p class="subtitle">Cities shaping the future</p>
+                    </div>
+                </div>
+                <div class="city-map" id="cityMap"></div>
+                <div class="city-stats" id="cityStats"></div>
+            </div>
+
+            <!-- Featured Startup - Medium tile -->
+            <div class="grid-item featured-startup" id="featuredStartup1">
+                <div class="featured-glow"></div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="icon-box indigo">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Featured Startup</h3>
+                            <p class="subtitle">Deal spotlight</p>
+                        </div>
+                    </div>
+                    <div class="startup-info" id="startup1Info"></div>
+                </div>
+            </div>
+
+            <!-- Sub Verticals - Medium tile -->
+            <div class="grid-item sub-verticals">
+                <div class="card-header">
+                    <div class="icon-box cyan">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>New Frontiers</h3>
+                        <p class="subtitle">Emerging sub-sectors</p>
+                    </div>
+                </div>
+                <div class="sub-verticals-list" id="subVerticalsList"></div>
+                <div class="info-box cyan">
+                    <p><span class="highlight">Quick Commerce</span> and <span class="highlight">B2B SaaS</span> seeing rapid growth</p>
+                </div>
+            </div>
+
+            <!-- Investor Network - Large tile -->
+            <div class="grid-item large investor-network">
+                <div class="card-header">
+                    <div class="icon-box purple">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>The Money Movers</h3>
+                        <p class="subtitle">Most active investors</p>
+                    </div>
+                </div>
+                <div class="investor-list" id="investorList"></div>
+                <div class="info-box purple">
+                    <p>Top 10 investors drove <span class="highlight">47% of total funding</span></p>
+                </div>
+            </div>
+
+            <!-- Second Featured Startup - Medium tile -->
+            <div class="grid-item featured-startup" id="featuredStartup2">
+                <div class="featured-glow"></div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="icon-box indigo">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Featured Startup</h3>
+                            <p class="subtitle">Deal spotlight</p>
+                        </div>
+                    </div>
+                    <div class="startup-info" id="startup2Info"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p class="footer-text">Data represents India's startup funding ecosystem from 2020 to present</p>
+            <p class="footer-subtext">Designed for storytelling and data visualization</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
