@@ -60,3 +60,20 @@ import { defineConfig } from 'vite';
       open: true,
     },
   });
+
+  // scripts
+  // "scripts": {
+  //   "build": "npx tsc && vite build"
+  // }
+
+  // compilerOptions
+  // {
+  //   "target": "esnext",
+  //   "module": "esnext",
+  //   "jsx": "react-jsx",
+  //   "strict": true,
+  //   "esModuleInterop": true,
+  //   "skipLibCheck": true,
+  //   "forceConsistentCasingInFileNames": true
+  // }
+  // "include": ["src"]
