@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { Layers } from 'lucide-react';
 
 interface SectorChartProps {
@@ -6,36 +6,45 @@ interface SectorChartProps {
 }
 
 export function SectorChart({ data }: SectorChartProps) {
-  // Take top 6 sectors for the donut chart
-  const topSectors = data.slice(0, 6);
+  // Take top 6 sectors and assign yellow shades
+  const topSectors = data.slice(0, 6).map((sector, index) => ({
+    ...sector,
+    color: `hsl(45, 100%, ${90 - index * 10}%)` // Shades of yellow from light to dark
+  }));
   
   return (
-    <div className="rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800/50 h-full flex flex-col overflow-hidden">
+    <div className="rounded-2xl bg-[#151515] border border-[#3A3A3A] h-full flex flex-col overflow-hidden">
       {/* Header Section */}
-      <div className="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 px-6 py-5 border-b border-cyan-700/30">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-cyan-500/20 shadow-lg">
-            <Layers className="w-5 h-5 text-cyan-400" />
+      <div className="bg-[#0E0E0E] px-5 py-4 border-b border-[#3A3A3A]">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-[#FFD400] flex items-center justify-center">
+            <Layers className="w-4 h-4 text-[#0E0E0E]" strokeWidth={2.5} />
           </div>
           <div>
-            <h3 className="text-white text-lg tracking-tight">Sector Distribution</h3>
-            <p className="text-zinc-400 text-sm">Top sectors by funding</p>
+            <h3 className="text-white tracking-tight text-base font-bold uppercase">Sector Distribution</h3>
+            <p className="text-[#808080] text-xs uppercase tracking-wider">Top sectors by funding</p>
           </div>
         </div>
       </div>
 
       {/* Chart Area */}
-      <div className="flex-1 flex items-center justify-center p-6">
+      <div className="flex-1 flex items-center justify-center p-4 min-h-0">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
+            <defs>
+              <pattern id="donutStripes" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="8" stroke="rgba(0,0,0,0.1)" strokeWidth="4" />
+              </pattern>
+            </defs>
             <Pie
               data={topSectors}
               cx="50%"
               cy="50%"
-              innerRadius="60%"
-              outerRadius="85%"
+              innerRadius="55%"
+              outerRadius="80%"
               dataKey="funding"
-              paddingAngle={2}
+              paddingAngle={3}
+              strokeWidth={0}
             >
               {topSectors.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} />
@@ -43,30 +52,33 @@ export function SectorChart({ data }: SectorChartProps) {
             </Pie>
             <Tooltip
               contentStyle={{
-                backgroundColor: '#18181b',
-                border: '1px solid #3f3f46',
-                borderRadius: '12px',
-                color: '#fff',
-                fontSize: '13px',
+                backgroundColor: '#151515',
+                border: '2px solid #FFD400',
+                borderRadius: '8px',
+                fontSize: '12px',
                 padding: '12px',
-                boxShadow: '0 10px 40px rgba(0,0,0,0.5)'
+                fontWeight: 600
+              }}
+              itemStyle={{
+                color: '#ffffff'
               }}
               formatter={(value: number) => [`$${value}M`, 'Funding']}
+              labelStyle={{ color: '#FFD400', fontWeight: 700 }}
             />
           </PieChart>
         </ResponsiveContainer>
       </div>
 
       {/* Legend */}
-      <div className="px-6 pb-6">
-        <div className="grid grid-cols-2 gap-3 bg-zinc-900/50 rounded-2xl p-4 border border-zinc-800/50">
+      <div className="px-5 pb-5">
+        <div className="grid grid-cols-2 gap-2.5 bg-[#0E0E0E] rounded-xl p-4 border border-[#3A3A3A]">
           {topSectors.map((sector) => (
             <div key={sector.name} className="flex items-center gap-2">
               <div 
-                className="w-3 h-3 rounded-full flex-shrink-0 shadow-sm" 
+                className="w-3 h-3 rounded-sm flex-shrink-0" 
                 style={{ backgroundColor: sector.color }}
               />
-              <span className="text-zinc-300 text-xs truncate">{sector.name}</span>
+              <span className="text-[#D5D5D5] text-xs truncate font-medium">{sector.name}</span>
             </div>
           ))}
         </div>

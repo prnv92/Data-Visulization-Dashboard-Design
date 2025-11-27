@@ -1,90 +1,122 @@
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { TrendingUp } from 'lucide-react';
 
 interface TimelineChartProps {
   data: Array<{ year: string; funding: number; deals: number }>;
 }
 
-export function TimelineChart({ data }: TimelineChartProps) {
+// Custom bar shape with diagonal stripes
+const DiagonalStripeBar = (props: any) => {
+  const { fill, x, y, width, height } = props;
+  
   return (
-    <div className="rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800/50 h-full flex flex-col overflow-hidden">
-      {/* Header Section with distinct background */}
-      <div className="bg-gradient-to-r from-teal-900/30 to-cyan-900/30 px-6 py-5 border-b border-teal-700/30">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-teal-500/20 shadow-lg">
-            <TrendingUp className="w-5 h-5 text-teal-400" />
-          </div>
+    <g>
+      {/* Main bar */}
+      <rect x={x} y={y} width={width} height={height} fill={fill} rx={4} />
+      {/* Diagonal stripes overlay */}
+      <defs>
+        <pattern id={`stripes-${x}`} patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="10" stroke="rgba(0,0,0,0.15)" strokeWidth="6" />
+        </pattern>
+      </defs>
+      <rect x={x} y={y} width={width} height={height} fill={`url(#stripes-${x})`} rx={4} />
+    </g>
+  );
+};
+
+export function TimelineChart({ data }: TimelineChartProps) {
+  const maxValue = Math.max(...data.map(d => d.funding));
+  
+  return (
+    <div className="rounded-2xl bg-[#151515] border border-[#3A3A3A] h-full flex flex-col overflow-hidden">
+      {/* Header Section */}
+      <div className="bg-[#0E0E0E] px-5 py-4 border-b border-[#3A3A3A]">
+        <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-white text-lg tracking-tight">Funding Momentum</h3>
-            <p className="text-zinc-400 text-sm">Yearly funding trends ($M)</p>
+            <h3 className="text-white tracking-tight text-base font-bold uppercase">Sales Performance</h3>
+            <p className="text-[#808080] text-xs uppercase tracking-wider mt-0.5">Yearly funding trends</p>
+          </div>
+          <div className="flex items-center gap-2 bg-[#151515] px-3 py-1.5 rounded-lg border border-[#3A3A3A]">
+            <span className="text-[#FFD400] text-sm">This Week</span>
+            <svg className="w-4 h-4 text-[#FFD400]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
         </div>
       </div>
 
       {/* Chart Area */}
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-5 min-h-0">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data} margin={{ left: 10, right: 10, top: 10, bottom: 10 }}>
+          <BarChart data={data} margin={{ left: 0, right: 0, top: 20, bottom: 0 }}>
             <defs>
-              <linearGradient id="fundingGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#14b8a6" stopOpacity={0.5} />
-                <stop offset="95%" stopColor="#14b8a6" stopOpacity={0} />
-              </linearGradient>
+              <pattern id="diagonalStripes" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="10" stroke="rgba(0,0,0,0.15)" strokeWidth="6" />
+              </pattern>
             </defs>
             <XAxis 
               dataKey="year" 
-              stroke="#71717a" 
-              fontSize={12}
+              stroke="#808080" 
+              fontSize={11}
               tickLine={false}
-              axisLine={{ stroke: '#3f3f46' }}
+              axisLine={false}
+              tick={{ fill: '#808080', fontWeight: 600 }}
             />
             <YAxis 
-              stroke="#71717a" 
-              fontSize={12} 
+              stroke="#808080" 
+              fontSize={11} 
               width={50}
               tickLine={false}
-              axisLine={{ stroke: '#3f3f46' }}
+              axisLine={false}
+              tick={{ fill: '#808080', fontWeight: 600 }}
+              domain={[0, maxValue * 1.2]}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#18181b',
-                border: '1px solid #3f3f46',
-                borderRadius: '12px',
-                color: '#fff',
-                fontSize: '13px',
+                backgroundColor: '#151515',
+                border: '2px solid #FFD400',
+                borderRadius: '8px',
+                fontSize: '12px',
                 padding: '12px',
-                boxShadow: '0 10px 40px rgba(0,0,0,0.5)'
+                fontWeight: 600
+              }}
+              itemStyle={{
+                color: '#ffffff'
               }}
               formatter={(value: number, name: string) => {
                 if (name === 'funding') return [`$${value}M`, 'Funding'];
                 return [value, 'Deals'];
               }}
+              labelStyle={{ color: '#FFD400', fontWeight: 700 }}
             />
-            <Area
-              type="monotone"
+            <Bar
               dataKey="funding"
-              stroke="#14b8a6"
-              strokeWidth={3}
-              fill="url(#fundingGradient)"
-            />
-          </AreaChart>
+              radius={[6, 6, 0, 0]}
+              maxBarSize={80}
+              shape={DiagonalStripeBar}
+            >
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill="#FFD400" />
+              ))}
+            </Bar>
+          </BarChart>
         </ResponsiveContainer>
       </div>
 
       {/* Stats Footer */}
-      <div className="px-6 pb-6">
-        <div className="grid grid-cols-3 gap-4 bg-zinc-900/50 rounded-2xl p-4 border border-zinc-800/50">
+      <div className="px-5 pb-5">
+        <div className="grid grid-cols-3 gap-3 bg-[#0E0E0E] rounded-xl p-4 border border-[#3A3A3A]">
           <div className="text-center">
-            <div className="text-zinc-400 text-xs mb-1.5 uppercase tracking-wider">Peak Year</div>
-            <div className="text-white text-lg">2022</div>
+            <div className="text-[#808080] text-xs mb-1 uppercase tracking-wider">Peak Year</div>
+            <div className="text-white font-bold text-base">2022</div>
           </div>
-          <div className="text-center border-x border-zinc-800/50">
-            <div className="text-zinc-400 text-xs mb-1.5 uppercase tracking-wider">Total Deals</div>
-            <div className="text-white text-lg">{data.reduce((sum, d) => sum + d.deals, 0)}</div>
+          <div className="text-center border-x border-[#3A3A3A]">
+            <div className="text-[#808080] text-xs mb-1 uppercase tracking-wider">Total Deals</div>
+            <div className="text-white font-bold text-base">{data.reduce((sum, d) => sum + d.deals, 0)}</div>
           </div>
           <div className="text-center">
-            <div className="text-zinc-400 text-xs mb-1.5 uppercase tracking-wider">Avg/Year</div>
-            <div className="text-white text-lg">$25.5B</div>
+            <div className="text-[#808080] text-xs mb-1 uppercase tracking-wider">Avg/Year</div>
+            <div className="text-white font-bold text-base">$25.5B</div>
           </div>
         </div>
       </div>

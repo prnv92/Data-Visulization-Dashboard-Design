@@ -1,4 +1,8 @@
 import { Users } from 'lucide-react';
+import { ImageWithFallback } from './figma/ImageWithFallback';
+import sequoiaLogo from 'figma:asset/9b7e42d302fd16cb067b30bb12a64d4ef1282ca7.png';
+import oriosLogo from 'figma:asset/589e41de9d326e01546dc374a2ebbc422468b1ee.png';
+import tigerGlobalLogo from 'figma:asset/23d199f592e7eb955b2a55e5f76e1a317f6135a5.png';
 
 interface Investor {
   name: string;
@@ -10,48 +14,55 @@ interface InvestorNetworkProps {
   data: Investor[];
 }
 
+// Map investor names to their logos
+const investorLogos: Record<string, string> = {
+  'Sequoia Capital': sequoiaLogo,
+  'Tiger Global': tigerGlobalLogo,
+  'Accel': oriosLogo,
+};
+
 export function InvestorNetwork({ data }: InvestorNetworkProps) {
   const topInvestors = data.slice(0, 3);
-  const maxAmount = Math.max(...topInvestors.map(i => i.amount));
   
   return (
-    <div className="rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800/50 h-full flex flex-col overflow-hidden">
+    <div className="rounded-2xl bg-[#151515] border border-[#3A3A3A] h-full flex flex-col overflow-hidden">
       {/* Header Section */}
-      <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 px-6 py-5 border-b border-purple-700/30">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-purple-500/20 shadow-lg">
-            <Users className="w-5 h-5 text-purple-400" />
+      <div className="bg-[#0E0E0E] px-5 py-4 border-b border-[#3A3A3A]">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-[#FFD400] flex items-center justify-center">
+            <Users className="w-4 h-4 text-[#0E0E0E]" strokeWidth={2.5} />
           </div>
           <div>
-            <h3 className="text-white text-lg tracking-tight">Top Investors</h3>
-            <p className="text-zinc-400 text-sm">Most active</p>
+            <h3 className="text-white tracking-tight text-base font-bold uppercase">Top Investors</h3>
+            <p className="text-[#808080] text-xs uppercase tracking-wider">Most active</p>
           </div>
         </div>
       </div>
 
       {/* Content Area */}
-      <div className="flex-1 flex items-center justify-center p-6">
+      <div className="flex-1 flex items-center justify-center p-5">
         <div className="flex items-center justify-around w-full gap-4">
-          {topInvestors.map((investor, index) => {
-            const size = 60 + ((investor.amount / maxAmount) * 30);
+          {topInvestors.map((investor) => {
+            const logo = investorLogos[investor.name];
             
             return (
               <div key={investor.name} className="flex flex-col items-center gap-3 group cursor-pointer">
                 <div 
-                  className="rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white border-3 border-purple-400 shadow-2xl transition-transform duration-300 group-hover:scale-110"
-                  style={{ 
-                    width: `${size}px`, 
-                    height: `${size}px`,
-                    fontSize: `${size / 2.5}px`,
-                    boxShadow: '0 0 20px rgba(168, 85, 247, 0.4)'
-                  }}
+                  className="w-20 h-20 rounded-xl bg-white flex items-center justify-center border-2 border-[#3A3A3A] transition-all duration-300 group-hover:border-[#FFD400] overflow-hidden p-3"
                 >
-                  {index + 1}
+                  {logo ? (
+                    <ImageWithFallback 
+                      src={logo} 
+                      alt={investor.name} 
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    <div className="text-[#0E0E0E] text-xs text-center font-bold">{investor.name}</div>
+                  )}
                 </div>
                 <div className="text-center">
-                  <div className="text-white text-sm truncate max-w-[100px] mb-1">{investor.name}</div>
-                  <div className="text-purple-400 text-xs tabular-nums">${investor.amount}M</div>
-                  <div className="text-zinc-500 text-xs">{investor.deals} deals</div>
+                  <div className="text-[#FFD400] text-sm mb-1 font-bold">${investor.amount}M</div>
+                  <div className="text-[#808080] text-xs uppercase tracking-wider">{investor.deals} deals</div>
                 </div>
               </div>
             );
