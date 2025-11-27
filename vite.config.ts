@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 
   export default defineConfig({
     plugins: [react()],
+    base: '/Data-Visulization-Dashboard-Design/',
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       alias: {
