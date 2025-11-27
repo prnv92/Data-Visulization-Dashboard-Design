@@ -1,88 +1,89 @@
 // Mock data representing India's startup funding ecosystem (2020-2025)
 
-export const totalFunding = 127500000000; // $127.5B
-export const totalStartups = 3044;
+export const totalFunding = 46383914944; // $46.4B (derived from startup_funding.csv)
+export const totalStartups = 1706;
 
 export const sectorData = [
-  { name: 'FinTech', funding: 32500, color: '#6366f1' },
-  { name: 'E-commerce', funding: 28700, color: '#8b5cf6' },
-  { name: 'EdTech', funding: 18900, color: '#ec4899' },
-  { name: 'HealthTech', funding: 15600, color: '#14b8a6' },
-  { name: 'SaaS', funding: 12800, color: '#f59e0b' },
-  { name: 'LogisticsTech', funding: 9500, color: '#10b981' },
-  { name: 'FoodTech', funding: 6200, color: '#ef4444' },
-  { name: 'AgriTech', funding: 3300, color: '#84cc16' },
+  { name: 'Consumer Internet', funding: 6253.08, color: '#6366f1' },
+  { name: 'eCommerce', funding: 5002.53, color: '#8b5cf6' },
+  { name: 'Transportation', funding: 3916.63, color: '#ec4899' },
+  { name: 'Technology', funding: 2229.71, color: '#14b8a6' },
+  { name: 'News Aggregator mobile app', funding: 2020, color: '#f59e0b' },
+  { name: 'Premium Loyalty Rewards Point Management', funding: 2019.35, color: '#f97316' },
+  { name: 'Online Jewellery Store', funding: 2016.2, color: '#10b981' },
+  { name: 'Casual Dining restaurant Chain', funding: 2010, color: '#a855f7' },
 ];
 
 export const timelineData = [
-  { year: '2020', funding: 11200, deals: 412 },
-  { year: '2021', funding: 24800, deals: 678 },
-  { year: '2022', funding: 35600, deals: 892 },
-  { year: '2023', funding: 28900, deals: 654 },
-  { year: '2024', funding: 27000, deals: 408 },
+  { year: '2015', funding: 16909.24, deals: 654 },
+  { year: '2016', funding: 3828.09, deals: 586 },
+  { year: '2017', funding: 10429.31, deals: 456 },
+  { year: '2018', funding: 5116.12, deals: 264 },
+  { year: '2019', funding: 9700.92, deals: 105 },
+  { year: '2020', funding: 390.21, deals: 7 },
 ];
 
 export const cityData = [
-  { name: 'Bengaluru', startups: 1243, funding: 45600, x: 55, y: 68 },
-  { name: 'Delhi NCR', startups: 876, funding: 32400, x: 45, y: 35 },
-  { name: 'Mumbai', startups: 542, funding: 28700, x: 32, y: 58 },
-  { name: 'Hyderabad', startups: 234, funding: 8900, x: 58, y: 62 },
-  { name: 'Pune', startups: 149, funding: 5900, x: 35, y: 60 },
+  { name: 'Bangalore', startups: 457, funding: 11361.59, x: 55, y: 70 },
+  { name: 'Bengaluru', startups: 127, funding: 7112.92, x: 55, y: 68 },
+  { name: 'Mumbai', startups: 401, funding: 4921.19, x: 32, y: 58 },
+  { name: 'New Delhi', startups: 241, funding: 3017.82, x: 45, y: 35 },
+  { name: 'Gurgaon', startups: 198, funding: 3005.3, x: 45, y: 35 },
 ];
 
 export const investorData = [
-  { name: 'Sequoia Capital', deals: 187, amount: 12400 },
-  { name: 'Tiger Global', deals: 156, amount: 9800 },
-  { name: 'Accel', deals: 143, amount: 8600 },
-  { name: 'SoftBank', deals: 89, amount: 15200 },
-  { name: 'Nexus Venture', deals: 98, amount: 5400 },
-  { name: 'Lightspeed', deals: 87, amount: 6700 },
-  { name: 'Peak XV', deals: 76, amount: 7200 },
-  { name: 'Matrix Partners', deals: 71, amount: 4900 },
+  { name: 'Westbridge Capital', deals: 1, amount: 3900 },
+  { name: 'Softbank', deals: 6, amount: 3545 },
+  { name: 'Accel Partners', deals: 59, amount: 2881.68 },
+  { name: 'SoftBank Group', deals: 6, amount: 2487 },
+  { name: 'Tiger Global', deals: 27, amount: 2045.4 },
+  { name: 'IndianIdeas.com', deals: 1, amount: 2019.35 },
+  { name: 'IvyCap Ventures', deals: 1, amount: 2016.2 },
+  { name: 'Tiger Global Management', deals: 1, amount: 2020 },
 ];
 
 export const fundingStages = [
-  { name: 'Seed', value: 892, color: '#6366f1' },
-  { name: 'Series A', value: 634, color: '#8b5cf6' },
-  { name: 'Series B', value: 412, color: '#ec4899' },
-  { name: 'Series C', value: 287, color: '#14b8a6' },
-  { name: 'Series D+', value: 156, color: '#f59e0b' },
-  { name: 'Private Equity', value: 234, color: '#10b981' },
-  { name: 'Debt', value: 429, color: '#ef4444' },
+  { name: 'Private Equity', value: 1071, color: '#6366f1' },
+  { name: 'Seed Funding', value: 722, color: '#8b5cf6' },
+  { name: 'Seed Angel Funding', value: 104, color: '#ec4899' },
+  { name: 'Debt Funding', value: 25, color: '#14b8a6' },
+  { name: 'Series A', value: 22, color: '#f59e0b' },
+  { name: 'Series B', value: 20, color: '#10b981' },
+  { name: 'Series C', value: 14, color: '#ef4444' },
 ];
 
 export const featuredStartups = [
   {
-    name: 'CRED',
-    industry: 'FinTech',
-    funding: '$805M',
-    round: 'Series F',
-    year: 2024,
-    description: 'Rewarding credit card payments',
+    name: 'BYJU’S',
+    industry: 'EdTech',
+    funding: '$2.0B',
+    round: 'Private Equity',
+    year: 2020,
+    description: 'Leading education platform with global reach',
   },
   {
-    name: 'PharmEasy',
-    industry: 'HealthTech',
-    funding: '$350M',
-    round: 'Series E',
-    year: 2023,
-    description: 'Digital healthcare platform',
+    name: 'Zomato',
+    industry: 'Consumer Internet',
+    funding: '$1.5B',
+    round: 'Private Equity',
+    year: 2020,
+    description: 'Food delivery & restaurant discovery network',
   },
 ];
 
 export const insights = [
-  'FinTech accounts for 26% of all startup funding in India',
-  'Bengaluru hosts 41% of all funded startups',
-  'Average Series A round size: $8.2M',
-  'Top 10 investors drove 47% of total funding',
-  'EdTech funding surged 340% during 2020-2021',
-  'Seed funding rounds increased by 118% since 2020',
+  'Consumer Internet and eCommerce dominate funding with 11.2% and 9.8% shares',
+  'Bangalore and Bengaluru together contribute over 18B USD of investments',
+  'Series A to C funding rounds represent the fastest growing deal activity',
+  'Private Equity rounds led 1,071 deals in this CSV sample',
+  'Seed and Angel activity accounted for 826 rounds across the period',
+  'Debt funding remained a niche but steady component of the mix',
 ];
 
 export const subVerticals = [
-  { name: 'B2B SaaS', parent: 'SaaS', deals: 234 },
-  { name: 'E-learning', parent: 'EdTech', deals: 189 },
-  { name: 'Digital Payments', parent: 'FinTech', deals: 167 },
-  { name: 'Quick Commerce', parent: 'E-commerce', deals: 145 },
-  { name: 'Telemedicine', parent: 'HealthTech', deals: 123 },
+  { name: 'Online Lending Platform', parent: 'FinTech', deals: 11 },
+  { name: 'Online Pharmacy', parent: 'eCommerce', deals: 10 },
+  { name: 'Education', parent: 'Technology', deals: 5 },
+  { name: 'Online Lending', parent: 'Finance', deals: 5 },
+  { name: 'Food Delivery Platform', parent: 'Consumer Internet', deals: 8 },
 ];
