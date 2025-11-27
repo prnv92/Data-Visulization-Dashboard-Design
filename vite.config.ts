@@ -53,7 +53,9 @@ import { defineConfig } from 'vite';
     },
     build: {
       target: 'esnext',
-      outDir: 'build',
+      outDir: 'docs',
+      // optional: avoid chunk-size warning
+      chunkSizeWarningLimit: 1000,
     },
     server: {
       port: 3000,
