@@ -45,15 +45,15 @@ export function HeroStats({ totalFunding, totalStartups }: HeroStatsProps) {
     <div className="relative overflow-hidden rounded-2xl bg-[#151515] h-full border border-[#3A3A3A]">
       <div className="relative z-10 h-full p-6 flex flex-col justify-between">
         <div>
-          <h1 className="text-white text-4xl mb-2 tracking-tight font-bold uppercase">
+          <h1 className="text-white mb-2 tracking-tight font-bold uppercase text-[48px]">
             Funding the Future
           </h1>
           <p className="text-[#808080] text-base uppercase tracking-wider">
-            Mapping India's Startup Momentum 2020-2024
+            Mapping India's Startup Momentum 2015-2020
           </p>
         </div>
 
-        <div className="grid grid-cols-4 gap-4 h-24">
+        <div className="grid grid-cols-2 gap-4 h-28">
           {/* Total Funding KPI */}
           <div className="bg-[#0E0E0E] rounded-xl p-4 border border-[#3A3A3A] relative overflow-hidden">
             <div className="absolute top-3 right-3 w-10 h-10 rounded-lg bg-[#FFD400] flex items-center justify-center">
@@ -61,7 +61,7 @@ export function HeroStats({ totalFunding, totalStartups }: HeroStatsProps) {
             </div>
             <div className="pt-1">
               <div className="text-[#808080] text-xs uppercase tracking-wider mb-2">Total Funding</div>
-              <div className="text-white text-4xl tabular-nums tracking-tight font-bold">
+              <div className="text-white text-3xl tabular-nums tracking-tight font-bold">
                 {formatFunding(animatedFunding)}
               </div>
             </div>
@@ -74,38 +74,15 @@ export function HeroStats({ totalFunding, totalStartups }: HeroStatsProps) {
             </div>
             <div className="pt-1">
               <div className="text-[#808080] text-xs uppercase tracking-wider mb-2">Startups Funded</div>
-              <div className="text-white text-4xl tabular-nums tracking-tight font-bold">
+              <div className="text-white text-3xl tabular-nums tracking-tight font-bold">
                 {animatedStartups.toLocaleString()}
               </div>
             </div>
           </div>
 
-          {/* Additional stat - From Yesterday */}
-          <div className="bg-[#0E0E0E] rounded-xl p-4 border border-[#3A3A3A] relative overflow-hidden">
-            <div className="absolute top-3 right-3 w-10 h-10 rounded-lg border border-[#3A3A3A] flex items-center justify-center">
-              <ArrowUpRight className="w-5 h-5 text-[#22c55e]" strokeWidth={2.5} />
-            </div>
-            <div className="pt-1">
-              <div className="text-[#808080] text-xs uppercase tracking-wider mb-2">From Yesterday</div>
-              <div className="text-white text-4xl tabular-nums tracking-tight font-bold flex items-baseline gap-2">
-                09%
-                <span className="text-[#22c55e] text-base">↑</span>
-              </div>
-            </div>
-          </div>
 
-          {/* Additional stat - Active Deals */}
-          <div className="bg-[#0E0E0E] rounded-xl p-4 border border-[#3A3A3A] relative overflow-hidden">
-            <div className="absolute top-3 right-3 w-10 h-10 rounded-lg border border-[#3A3A3A] flex items-center justify-center">
-              <div className="w-5 h-5 rounded-full border-2 border-[#FFD400] border-t-transparent animate-spin" />
-            </div>
-            <div className="pt-1">
-              <div className="text-[#808080] text-xs uppercase tracking-wider mb-2">Active Deals</div>
-              <div className="text-white text-4xl tabular-nums tracking-tight font-bold">
-                234
-              </div>
-            </div>
-          </div>
+
+
         </div>
       </div>
     </div>

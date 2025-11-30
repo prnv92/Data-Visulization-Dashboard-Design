@@ -4,7 +4,7 @@ import { TimelineChart } from './components/TimelineChart';
 import { IndiaHeatMap } from './components/IndiaHeatMap';
 import { InvestorNetwork } from './components/InvestorNetwork';
 import { FundingStages } from './components/FundingStages';
-import { SubVerticals } from './components/SubVerticals';
+import { TopStartups } from './components/TopStartups';
 import {
   totalFunding,
   totalStartups,
@@ -13,7 +13,7 @@ import {
   cityData,
   investorData,
   fundingStages,
-  subVerticals,
+  topFundedStartups,
 } from './data/mockData';
 
 export default function App() {
@@ -52,9 +52,9 @@ export default function App() {
             <InvestorNetwork data={investorData} />
           </div>
 
-          {/* Bottom Middle - Top 10 Sectors */}
+          {/* Bottom Middle - Top Funded Startups */}
           <div className="col-span-2 row-span-1 min-h-0">
-            <SubVerticals data={subVerticals} />
+            <TopStartups data={topFundedStartups} />
           </div>
 
           {/* Bottom Right - Empty (InsightPanel removed) */}

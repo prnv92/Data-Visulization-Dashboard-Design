@@ -1,10 +1,10 @@
-import { defineConfig } from 'vite';
+
+  import { defineConfig } from 'vite';
   import react from '@vitejs/plugin-react-swc';
   import path from 'path';
 
   export default defineConfig({
     plugins: [react()],
-    base: '/Data-Visulization-Dashboard-Design/',
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       alias: {
@@ -54,29 +54,10 @@ import { defineConfig } from 'vite';
     },
     build: {
       target: 'esnext',
-      outDir: 'docs',
-      // optional: avoid chunk-size warning
-      chunkSizeWarningLimit: 1000,
+      outDir: 'build',
     },
     server: {
       port: 3000,
       open: true,
     },
   });
-
-  // scripts
-  // "scripts": {
-  //   "build": "npx tsc && vite build"
-  // }
-
-  // compilerOptions
-  // {
-  //   "target": "esnext",
-  //   "module": "esnext",
-  //   "jsx": "react-jsx",
-  //   "strict": true,
-  //   "esModuleInterop": true,
-  //   "skipLibCheck": true,
-  //   "forceConsistentCasingInFileNames": true
-  // }
-  // "include": ["src"]
